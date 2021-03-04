@@ -1,12 +1,10 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT|| 3000
-const cors = require('cors')
+const jsonServer = require('json-server');
+const server = jsonServer.create();
+const router = jsonServer.router('kompas.json');
+const middlewares = jsonServer.defaults();
+const port = process.env.PORT || 3000;
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+server.use(middlewares);
+server.use(router);
 
-app.listen(port, () => {
-  console.log(`listen to ${port}`)
-})
+server.listen(port);
